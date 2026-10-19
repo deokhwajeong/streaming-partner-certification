@@ -1,0 +1,16 @@
+# Fictional partner. Premium 4K HDR originals. The declared memory footprint
+# exceeds the entry tier app limit, so a third of the matrix fails intake:
+# expected NO-GO until the spec is renegotiated (see docs/spec-negotiation-guide.md).
+id: fathom-originals
+name: Fathom Originals
+category: svod
+version: 1.0.0
+min_sdk: "6.2"
+memory_mb: 470
+has_payments: true
+requires_hdr: true
+targets: {model_years: [2024, 2025, 2026]}
+measurements:
+  - {metric: cold_start_ms, value: 3100}
+  - {metric: crash_free_pct, value: 99.58}
+signoffs: {engineering: true, qa: true, legal: true, partner: true}

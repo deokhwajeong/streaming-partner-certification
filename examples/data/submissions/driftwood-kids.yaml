@@ -1,0 +1,15 @@
+# Fictional partner. Kids video with purchases. Parental gate evidence was never
+# submitted and legal has not signed: expected NO-GO on a global gate.
+id: driftwood-kids
+name: Driftwood Kids
+category: kids
+version: 2.1.0
+min_sdk: "7.0"
+memory_mb: 300
+has_payments: true
+targets: {model_years: [2025, 2026]}
+evidence_missing: [LGL-02]
+measurements:
+  - {metric: cold_start_ms, value: 2100}
+  - {metric: crash_free_pct, value: 99.9}
+signoffs: {engineering: true, qa: true, legal: false, partner: true}

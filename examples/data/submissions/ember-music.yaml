@@ -1,0 +1,21 @@
+# Fictional partner. Audio streaming. Minor UX issues only: GO with known issues.
+id: ember-music
+name: Ember Music
+category: audio
+version: 7.4.0
+min_sdk: "6.2"
+memory_mb: 220
+has_payments: true
+targets: {model_years: [2024, 2025, 2026]}
+findings:
+  - test: UX-01
+    defect: DEF-4510
+    title: Lyrics panel focus skips the close button
+  - test: UX-01
+    defect: DEF-4514
+    title: Now playing art clips at 97 inch overscan
+    scope: {models: [TV26-P97A]}
+measurements:
+  - {metric: cold_start_ms, value: 1800}
+  - {metric: crash_free_pct, value: 99.92}
+signoffs: {engineering: true, qa: true, legal: true, partner: true}

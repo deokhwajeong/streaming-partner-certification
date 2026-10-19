@@ -1,0 +1,22 @@
+# Fictional partner. Live sports, needs SDK 7.0+ for low-latency playback.
+# Entry tier misses the cold start bar; a time-boxed waiver makes it CONDITIONAL.
+id: brightline-sports
+name: Brightline Sports
+category: live-sports
+version: 5.0.3
+min_sdk: "7.0"
+memory_mb: 380
+has_payments: true
+requires_hdr: true
+targets: {model_years: [2024, 2025, 2026]}
+measurements:
+  - {metric: cold_start_ms, value: 2900}
+  - {metric: cold_start_ms, value: 3920, scope: {tier: [entry]}}
+  - {metric: crash_free_pct, value: 99.71}
+waivers:
+  - test: PERF-01
+    scope: {tier: [entry]}
+    approved_by: Director, Partner Engineering
+    expires: 2026-12-15
+    mitigation: Deferred asset loading in 5.1.0; partner commits to under 3200 ms by Dec 1
+signoffs: {engineering: true, qa: true, legal: true, partner: true}

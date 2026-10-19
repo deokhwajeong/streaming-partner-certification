@@ -1,0 +1,26 @@
+# Fictional partner. Ad-supported video. Two real defects scoped to subsets of
+# the matrix: expected PARTIAL (launch on certified models, hold the rest).
+id: cinder-films
+name: Cinder Films
+category: avod
+version: 3.8.1
+min_sdk: "6.2"
+memory_mb: 340
+has_payments: false
+targets: {model_years: [2024, 2025, 2026]}
+findings:
+  - test: PB-02
+    defect: DEF-4471
+    title: DRM license renewal fails after 60 minutes on pre-6.4 firmware
+    scope: {soc: [K2, K3], firmware_lt: "6.4"}
+  - test: SDK-02
+    defect: DEF-4492
+    title: Back key during ad break exits app instead of returning to player
+    scope: {model_year: [2026], tier: [mid]}
+  - test: UX-01
+    defect: DEF-4503
+    title: Focus ring lost after closing the ad overlay
+measurements:
+  - {metric: cold_start_ms, value: 2400}
+  - {metric: crash_free_pct, value: 99.64}
+signoffs: {engineering: true, qa: true, legal: true, partner: true}

@@ -1,0 +1,130 @@
+# Declarative certification test plan. Gate ids and exit criteria mirror
+# docs/certification-playbook.md. All data in examples/ is fictional.
+name: Fall partner release train
+as_of: 2026-10-19
+
+policy:
+  min_launch_coverage: 0.75   # below this share of targeted models, the partner launch is NO-GO
+  minor_blocks: false         # minor failures ship as known issues
+  waivable: [major, minor]    # blockers are never waivable
+
+gates:
+  - id: G1
+    name: Intake and spec review
+    signers: [partner_tpm, platform_architect]
+  - id: G2
+    name: Platform compatibility
+    signers: [qa_lead, platform_eng]
+  - id: G3
+    name: Commerce and legal
+    signers: [payments_lead, legal]
+    global: true              # a failure here is not model specific; it blocks the launch
+  - id: G4
+    name: Performance and stability
+    signers: [qa_lead]
+  - id: G5
+    name: Launch readiness
+    signers: [program_tpm]
+    global: true
+
+tests:
+  # G1 Intake and spec review
+  - id: INT-01
+    gate: G1
+    title: Declared memory footprint within platform limit
+    severity: blocker
+    kind: spec
+    check: memory_budget
+    evidence: Partner spec sheet, peak resident memory at 4K playback
+  - id: INT-02
+    gate: G1
+    title: HDR requirement matches model capability
+    severity: major
+    kind: spec
+    check: hdr_capability
+    applies_if:
+      app: {requires_hdr: true}
+    evidence: Partner spec sheet, output format matrix
+
+  # G2 Platform compatibility
+  - id: SDK-01
+    gate: G2
+    title: No private or deprecated platform APIs
+    severity: blocker
+    evidence: Static API scan report against target SDK
+  - id: SDK-02
+    gate: G2
+    title: App lifecycle (launch, suspend, resume, back key, exit)
+    severity: major
+    evidence: Lifecycle test suite log
+  - id: PB-01
+    gate: G2
+    title: Playback start and seek across catalog sample
+    severity: blocker
+    evidence: Playback suite log, 50 title sample
+  - id: PB-02
+    gate: G2
+    title: DRM license acquisition and renewal
+    severity: blocker
+    evidence: DRM suite log including 90 minute renewal soak
+  - id: PB-03
+    gate: G2
+    title: HDR signaling and tone mapping
+    severity: major
+    applies_if:
+      model: {resolution: [2160p]}
+      app: {requires_hdr: true}
+    evidence: HDR conformance capture
+  - id: UX-01
+    gate: G2
+    title: Remote navigation and focus order
+    severity: minor
+    evidence: UX checklist
+
+  # G3 Commerce and legal
+  - id: PAY-01
+    gate: G3
+    title: In-app purchase, restore, and refund flow
+    severity: blocker
+    applies_if:
+      app: {has_payments: true}
+    evidence: Payments sandbox transcript
+  - id: LGL-01
+    gate: G3
+    title: Terms and privacy notice current for all launch regions
+    severity: blocker
+    evidence: Legal review record
+  - id: LGL-02
+    gate: G3
+    title: Parental gate before purchase and external links
+    severity: blocker
+    applies_if:
+      app: {category: [kids]}
+    evidence: Parental gate test record
+
+  # G4 Performance and stability
+  - id: PERF-01
+    gate: G4
+    title: Cold start to first interactive frame
+    severity: major
+    kind: metric
+    metric: cold_start_ms
+    max: 3500
+    evidence: Median of 20 cold starts per tier
+  - id: PERF-02
+    gate: G4
+    title: Crash-free sessions in 24 hour soak
+    severity: blocker
+    kind: metric
+    metric: crash_free_pct
+    min: 99.5
+    evidence: Soak report per model year
+
+  # G5 Launch readiness
+  - id: RDY-01
+    gate: G5
+    title: Cross-functional sign-off recorded
+    severity: blocker
+    kind: signoff
+    roles: [engineering, qa, legal, partner]
+    evidence: Launch readiness review minutes
