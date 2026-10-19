@@ -93,10 +93,10 @@
     });
     $("stack").appendChild(root);
     $("pairs-note").textContent = total + " in-scope pairs; out-of-scope models are excluded, not failed.";
-    var lg = $("stack-legend");
+    var legendEl = $("stack-legend");
     var sw = { go: "go", conditional: "cond", "no-go": "nogo" };
     parts.forEach(function (p) {
-      lg.appendChild(el("li", null, '<span class="sw ' + sw[p.k] + '"></span>' + p.label + " <b>" + p.n + "</b>"));
+      legendEl.appendChild(el("li", null, '<span class="sw ' + sw[p.k] + '"></span>' + p.label + " <b>" + p.n + "</b>"));
     });
   }
 
@@ -128,9 +128,9 @@
 
   /* Heatmap: partner rows x model columns, grouped by model year */
   function renderHeatmap() {
-    var lg = $("matrix-legend");
+    var legendEl = $("matrix-legend");
     [["go", "go", "Go"], ["cond", "conditional", "Conditional (waiver)"], ["nogo", "no-go", "No-go"], ["na", "n/a", "Not in scope"]]
-      .forEach(function (x) { lg.appendChild(el("li", null, '<span class="sw ' + x[0] + '"></span>' + x[2])); });
+      .forEach(function (x) { legendEl.appendChild(el("li", null, '<span class="sw ' + x[0] + '"></span>' + x[2])); });
 
     var cell = 18, gap = 2, groupGap = 14, labelW = 148, top = 40;
     var years = [];
