@@ -12,7 +12,7 @@ findings:
   - test: PB-02
     defect: DEF-4471
     title: DRM license renewal fails after 60 minutes on pre-6.4 firmware
-    scope: {soc: [K2, K3], firmware_lt: "6.4"}
+    scope: {soc: [S1, S2], firmware_lt: "6.4"}
   - test: SDK-02
     defect: DEF-4492
     title: Back key during ad break exits app instead of returning to player

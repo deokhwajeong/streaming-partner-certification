@@ -14,7 +14,7 @@ def test_g1_1_memory_over_platform_limit_is_no_go(plan, models, make_app):
     app = make_app(memory_mb=450)
     cell = evaluate_cell(app, models["entry24_new_fw"], plan)
     assert cell.decision is Decision.NO_GO
-    assert any("exceeds the 384 MB app memory limit" in r for r in cell.reasons)
+    assert any("exceeds the 400 MB app memory limit" in r for r in cell.reasons)
     # Same app fits the mid tier limit.
     assert evaluate_cell(app, models["mid25"], plan).decision is Decision.GO
 
@@ -68,7 +68,7 @@ def test_g1_3_untargeted_model_year_is_out_of_scope(models, make_app):
         (
             {
                 "findings": [
-                    {"test": "PB-01", "defect": "D1", "title": "x", "scope": {"chipset": ["K2"]}}
+                    {"test": "PB-01", "defect": "D1", "title": "x", "scope": {"chipset": ["S1"]}}
                 ]
             },
             "unknown scope key",

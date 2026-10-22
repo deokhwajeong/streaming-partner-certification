@@ -27,7 +27,7 @@ def test_g2_2_unwaived_major_lifecycle_failure_is_no_go(plan, models, make_app):
 
 def test_g2_3_drm_defect_scoped_to_firmware_only_hits_those_models(plan, models, make_app):
     """G2.3: findings are scoped; only models on the affected firmware fail."""
-    app = make_app(findings=[_finding("PB-02", scope={"soc": ["K2"], "firmware_lt": "6.4"})])
+    app = make_app(findings=[_finding("PB-02", scope={"soc": ["S1"], "firmware_lt": "6.4"})])
     assert evaluate_cell(app, models["entry24"], plan).decision is Decision.NO_GO
     assert evaluate_cell(app, models["entry24_new_fw"], plan).decision is Decision.GO
     assert evaluate_cell(app, models["mid25"], plan).decision is Decision.GO

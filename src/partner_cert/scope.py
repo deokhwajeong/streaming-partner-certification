@@ -2,7 +2,7 @@
 
 A scope is a small dict. An empty scope matches every model. All keys must match.
 
-    {"tier": ["entry"], "soc": ["K2"], "firmware_lt": "6.4"}
+    {"tier": ["entry"], "soc": ["S1"], "firmware_lt": "6.4"}
 """
 
 from __future__ import annotations
