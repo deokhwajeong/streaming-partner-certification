@@ -92,12 +92,12 @@ def test_duplicate_model_ids_rejected():
         "series": "s",
         "model_year": 2025,
         "tier": "mid",
-        "soc": "K6",
+        "soc": "S5",
         "firmware": "7.1",
         "sdk": "7.1",
         "resolution": "2160p",
         "hdr": True,
-        "app_memory_mb": 512,
+        "app_memory_mb": 500,
     }
     with pytest.raises(DataError, match="duplicate model ids"):
         parse_models({"models": [row, row]})

@@ -6,7 +6,7 @@ Most certification failures that cost weeks were visible on day one in the partn
 
 | Partner declares | Platform limit (example) | Gate it would fail | Typical root cause |
 |---|---|---|---|
-| Peak memory above the per-tier app limit | Entry 384 MB, mid 512 MB, premium 768 MB+ | G1.1 | Same build as their flagship device; large image caches; bundled web runtime |
+| Peak memory above the per-tier app limit | Entry 400 MB, mid 500 MB, premium 800 MB+ | G1.1 | Same build as their flagship device; large image caches; bundled web runtime |
 | HDR or 4K required on every model | HDR pipeline only on 2160p models | G1.2 | Marketing requirement applied to the whole fleet |
 | Codec or DRM level not on older SoCs | Hardware DRM and newer codecs from a given SoC onward | G2.3 | Content licensing terms written for newer devices |
 | Private or undocumented platform APIs | Public SDK only | G2.1 | Workarounds carried from another platform |
@@ -17,7 +17,7 @@ Most certification failures that cost weeks were visible on day one in the partn
 
 | Step | What you do | What you say (pattern) |
 |---|---|---|
-| 1. Name the limit | State the number and where it comes from | "Entry tier apps get 384 MB. That ceiling protects the tuner and the system UI on a 1.5 GB device." |
+| 1. Name the limit | State the number and where it comes from | "Entry tier apps get 400 MB. That ceiling protects the tuner and the system UI on a 1.5 GB device." |
 | 2. Show the gap | Put their number next to it, per tier and model count | "Your spec says 470 MB. That fails intake on 13 of 40 models in your target list." |
 | 3. Ask what they need | Separate the requirement from the implementation | "Is 470 the requirement, or is it what the current build uses?" |
 | 4. Offer two paths | One that changes the app, one that changes the scope | "Cap the texture cache and use the 1080p ladder on entry, or launch on mid and premium first." |
